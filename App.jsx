@@ -440,7 +440,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsVisibleLoader(true);
-    }, 6000);
+    }, 2500);
   }, []);
 
   // Animation state
@@ -466,7 +466,28 @@ const App = () => {
   return (
     <NavigationContainer>
       {!isVisibleLoader ? (
-        <IceDuelFishBattleLoader />
+        <View style={{ flex: 1, overflow: 'hidden' }}>
+          {/* Контейнер шириною у 2 * screenWidth: два зображення поруч */}
+          <Animated.View
+            style={{
+              flexDirection: 'row',
+              width: screenWidth * 2,
+              height: '100%',
+              transform: [{ translateX: slideAnim }],
+            }}
+          >
+            <Image
+              style={{ width: screenWidth, height: '100%' }}
+              source={require('./assets/images/11.png')}
+              resizeMode="cover"
+            />
+            <Image
+              style={{ width: screenWidth, height: '100%' }}
+              source={require('./assets/images/22.png')}
+              resizeMode="cover"
+            />
+          </Animated.View>
+        </View>
       ) : (
         <Route isFatch={route} />
       )}
